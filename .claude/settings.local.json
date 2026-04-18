@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(gunzip)",
+      "Bash(zcat \"C:\\\\Users\\\\PC\\\\.claude\\\\projects\\\\C--Users-PC-OneDrive-Documentos-Antigravity-P-gina-Jeovane\\\\3ea5a37e-8d4d-44ad-8075-329426515dc5\\\\tool-results\\\\webfetch-1776474783567-mwj485.bin\")",
+      "Bash(start *)",
+      "Bash(gh auth *)"
+    ]
+  }
+}
