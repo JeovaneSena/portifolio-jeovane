@@ -42,7 +42,7 @@
     line-height: 1.5;
     cursor: none;
   }
-  @media (pointer: coarse) { body { cursor: auto; } }
+  @media (pointer: coarse) { body { cursor: auto; } .hamburger { cursor: pointer; } }
 
   /* ── Cursor ── */
   #cursor-dot {
@@ -115,6 +115,7 @@
     position: absolute;
     border-radius: 50%;
     filter: blur(90px);
+    will-change: transform;
   }
   .orb-1 {
     width: 640px; height: 640px;
@@ -1042,6 +1043,231 @@
     nav.top { padding: 16px 20px; }
   }
 
+  /* ── Hero urgency ── */
+  .hero-urgency {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px;
+    background: rgba(74,222,128,0.06);
+    border: 1px solid rgba(74,222,128,0.22);
+    border-radius: 999px;
+    font-family: var(--mono); font-size: 10px;
+    color: #4ade80; letter-spacing: 0.10em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    align-self: flex-end;
+  }
+  .hero-urgency::before {
+    content: '';
+    width: 5px; height: 5px; border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 8px #4ade80;
+    animation: pulse-green 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  /* ── Process ── */
+  section.process {
+    padding: 160px 0;
+    border-top: 1px solid var(--line);
+  }
+  @media (max-width: 900px) { section.process { padding: 80px 0; } }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+  @media (max-width: 900px) {
+    .process-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .process-grid { grid-template-columns: 1fr; }
+  }
+
+  .process-step {
+    padding: 40px 32px;
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-right: 1px solid var(--line);
+    transition: background 0.3s;
+    position: relative;
+  }
+  .process-step:last-child { border-right: none; }
+  @media (max-width: 900px) {
+    .process-step:nth-child(2) { border-right: none; }
+    .process-step:nth-child(3) { border-right: 1px solid var(--line); }
+    .process-step:nth-child(1),
+    .process-step:nth-child(2) { border-bottom: 1px solid var(--line); }
+  }
+  @media (max-width: 480px) {
+    .process-step { border-right: none; border-bottom: 1px solid var(--line); }
+    .process-step:last-child { border-bottom: none; }
+  }
+  .process-step:hover { background: rgba(249,115,22,0.035); }
+
+  .process-step-num {
+    font-family: var(--mono);
+    font-size: 10px; color: var(--orange);
+    letter-spacing: 0.16em; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .process-step-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(249,115,22,0.08);
+    border: 1px solid rgba(249,115,22,0.18);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--orange); margin-bottom: 20px;
+    transition: all 0.3s cubic-bezier(0.2,0.8,0.2,1);
+  }
+  .process-step:hover .process-step-icon {
+    background: var(--orange); color: #0C0A09;
+    box-shadow: 0 6px 20px rgba(249,115,22,0.4);
+  }
+  .process-step h3 {
+    font-family: var(--display);
+    font-weight: 700; font-size: 20px;
+    letter-spacing: -0.02em; line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .process-step p {
+    font-size: 14px; color: var(--fg-dim);
+    line-height: 1.65;
+  }
+  @media (max-width: 768px) { .process-step { padding: 28px 24px; } }
+
+  /* ── Testimonials ── */
+  section.testimonials {
+    padding: 160px 0;
+    border-top: 1px solid var(--line);
+  }
+  @media (max-width: 900px) { section.testimonials { padding: 80px 0; } }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px) {
+    .testimonials-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .testimonials-grid { grid-template-columns: 1fr; }
+  }
+
+  .testimonial-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(244,242,238,0.09);
+    border-radius: 24px; padding: 36px;
+    position: relative; overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.2,0.8,0.2,1);
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .testimonial-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(249,115,22,0.45), transparent);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .testimonial-card:hover {
+    border-color: rgba(249,115,22,0.22);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 48px -16px rgba(249,115,22,0.15);
+  }
+  .testimonial-card:hover::before { opacity: 1; }
+
+  .testimonial-stars {
+    display: flex; gap: 3px; color: var(--orange);
+  }
+  .testimonial-quote {
+    font-size: 15px; line-height: 1.7;
+    color: var(--fg-dim); flex: 1;
+    position: relative; padding-left: 20px;
+  }
+  .testimonial-quote::before {
+    content: '"';
+    position: absolute; left: 0; top: -6px;
+    font-size: 44px; line-height: 1;
+    color: var(--orange); opacity: 0.35;
+    font-family: Georgia, serif; font-style: normal;
+  }
+  .testimonial-author {
+    display: flex; align-items: center; gap: 14px;
+    padding-top: 18px; border-top: 1px solid var(--line);
+  }
+  .testimonial-avatar {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(249,115,22,0.08);
+    border: 1px solid rgba(249,115,22,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--display); font-weight: 700; font-size: 13px;
+    color: var(--orange); flex-shrink: 0;
+    letter-spacing: -0.02em;
+  }
+  .testimonial-name {
+    font-family: var(--display); font-weight: 600;
+    font-size: 15px; letter-spacing: -0.01em;
+    margin-bottom: 2px;
+  }
+  .testimonial-role {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.1em;
+  }
+
+  /* ── Project visual accent ── */
+  .project-visual {
+    height: 72px; border-radius: 12px; overflow: hidden;
+    position: relative; flex-shrink: 0;
+    border: 1px solid rgba(244,242,238,0.07);
+    margin-bottom: 4px;
+  }
+  .project-visual-inner {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding: 0 20px;
+  }
+  .pv-1 {
+    background: linear-gradient(135deg,
+      rgba(249,115,22,0.14) 0%,
+      rgba(251,200,77,0.07) 55%,
+      transparent 100%);
+  }
+  .pv-2 {
+    background: linear-gradient(135deg,
+      rgba(74,222,128,0.10) 0%,
+      rgba(249,115,22,0.08) 55%,
+      transparent 100%);
+  }
+  .pv-label {
+    font-family: var(--mono); font-size: 9px;
+    text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--fg-muted); opacity: 0.6;
+  }
+  .pv-dots {
+    position: absolute; top: 14px; left: 16px;
+    display: flex; gap: 5px;
+  }
+  .pv-dots span {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: rgba(244,242,238,0.13);
+  }
+  .pv-dots span:first-child { background: rgba(249,115,22,0.55); }
+
+  /* ── Reduced Motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    html { scroll-behavior: auto; }
+  }
+
   ::selection { background: var(--orange); color: #0C0A09; }
 </style>
 </head>
@@ -1073,6 +1299,7 @@
   <div class="links">
     <a href="#sobre">Sobre</a>
     <a href="#servicos">Serviços</a>
+    <a href="#como-funciona">Processo</a>
     <a href="#projetos">Projetos</a>
     <a href="#contato">Contato</a>
   </div>
@@ -1088,9 +1315,10 @@
 <!-- Mobile nav -->
 <div class="mob-nav" id="mob-nav">
   <a href="#sobre"    onclick="closeMob()">Sobre</a>
-  <a href="#servicos" onclick="closeMob()">Serviços</a>
-  <a href="#projetos" onclick="closeMob()">Projetos</a>
-  <a href="#contato"  onclick="closeMob()">Contato</a>
+  <a href="#servicos"     onclick="closeMob()">Serviços</a>
+  <a href="#como-funciona" onclick="closeMob()">Processo</a>
+  <a href="#projetos"    onclick="closeMob()">Projetos</a>
+  <a href="#contato"     onclick="closeMob()">Contato</a>
 </div>
 
 <main class="shell">
@@ -1125,6 +1353,7 @@
         Construo <span class="word-cycle" id="word-cycle">automações com IA</span> que colocam negócios no piloto automático — com IA de verdade por trás.
       </p>
       <div class="hero-cta">
+        <span class="hero-urgency">2 vagas disponíveis em Maio</span>
         <div class="hero-cta-buttons">
           <a href="https://wa.me/5573991690494?text=Ol%C3%A1%20Jeovane!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20para%20o%20meu%20neg%C3%B3cio%20%F0%9F%9A%80" target="_blank" rel="noopener" class="btn primary">
             Vamos conversar <span class="arr">↗</span>
@@ -1402,6 +1631,60 @@
     </div>
   </section>
 
+  <!-- PROCESS -->
+  <section class="process" id="como-funciona">
+    <div class="section-label reveal">Processo</div>
+    <h2 class="section-title reveal d1">Como eu <em>trabalho.</em></h2>
+
+    <div class="process-grid">
+
+      <div class="process-step reveal d1">
+        <div class="process-step-num">01</div>
+        <div class="process-step-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </div>
+        <h3>Diagnóstico</h3>
+        <p>Entendo sua operação, onde o tempo é perdido e o que faz mais sentido automatizar primeiro.</p>
+      </div>
+
+      <div class="process-step reveal d2">
+        <div class="process-step-num">02</div>
+        <div class="process-step-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+          </svg>
+        </div>
+        <h3>Proposta</h3>
+        <p>Sketch da solução em 24h — escopo claro, prazo e o que você ganha de volta em produtividade.</p>
+      </div>
+
+      <div class="process-step reveal d3">
+        <div class="process-step-num">03</div>
+        <div class="process-step-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </div>
+        <h3>Construção</h3>
+        <p>Builds em sprints curtos. Você acompanha e testa cada entrega antes de ir ao ar.</p>
+      </div>
+
+      <div class="process-step reveal d4">
+        <div class="process-step-num">04</div>
+        <div class="process-step-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
+        <h3>Entrega</h3>
+        <p>Deploy, documentação e 30 dias de suporte inclusos. Sua equipe aprende a usar — sem depender de mim.</p>
+      </div>
+
+    </div>
+  </section>
+
   <!-- PROJECTS -->
   <section class="projects" id="projetos">
     <div class="section-label reveal">Projetos</div>
@@ -1411,6 +1694,10 @@
 
       <!-- Card 1 — AtendêAI -->
       <div class="project-card p1 reveal d2">
+        <div class="project-visual pv-1">
+          <div class="pv-dots"><span></span><span></span><span></span></div>
+          <div class="project-visual-inner"><span class="pv-label">WhatsApp · IA</span></div>
+        </div>
         <div class="project-header">
           <span class="project-tag">Clínica Estética · WhatsApp</span>
           <span class="project-num">01</span>
@@ -1433,6 +1720,10 @@
 
       <!-- Card 2 — CondoBot -->
       <div class="project-card p2 reveal d3">
+        <div class="project-visual pv-2">
+          <div class="pv-dots"><span></span><span></span><span></span></div>
+          <div class="project-visual-inner"><span class="pv-label">Agente · Chamados</span></div>
+        </div>
         <div class="project-header">
           <span class="project-tag">Engenharia · Condomínios</span>
           <span class="project-num">02</span>
@@ -1479,6 +1770,70 @@
               <span>WhatsApp API</span><span>LLMs</span><span>n8n</span><span>Looker Studio</span>
             </div>
             <span class="project-status">Entregue</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="depoimentos">
+    <div class="section-label reveal">Depoimentos</div>
+    <h2 class="section-title reveal d1">Clientes que <em>automatizaram.</em></h2>
+
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card reveal d1">
+        <div class="testimonial-stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="testimonial-quote">O bot do WhatsApp mudou completamente nosso atendimento. A clínica parou de perder agendamentos fora do horário e a equipe finalmente consegue focar no que importa.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">DM</div>
+          <div>
+            <div class="testimonial-name">Dra. Mariana</div>
+            <div class="testimonial-role">Clínica Estética · AtendêAI</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal d2">
+        <div class="testimonial-stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="testimonial-quote">Antes eu gastava horas por semana só triando chamados. Agora o agente faz isso sozinho — quando chego na obra, já sei exatamente o que vou encontrar.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RO</div>
+          <div>
+            <div class="testimonial-name">Rodrigo Oliveira</div>
+            <div class="testimonial-role">Engenheiro Civil · CondoBot</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal d3">
+        <div class="testimonial-stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="testimonial-quote">Economizei um colaborador inteiro só em agendamentos. O dashboard em tempo real é o que mais uso — tudo numa tela, direto do celular.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">LC</div>
+          <div>
+            <div class="testimonial-name">Lucas Carvalho</div>
+            <div class="testimonial-role">Gestor · AgendAI</div>
           </div>
         </div>
       </div>
